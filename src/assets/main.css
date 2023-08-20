@@ -1,0 +1,119 @@
+@import './base.css';
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    justify-content: center;
+    padding: 0 2rem;
+  }
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+
+  font-weight: normal;
+  background-color: rgb(168, 175, 154);
+}
+
+#todo-list{
+  background-color: rgb(84, 94, 86);
+  color: black;
+  padding: 10px;
+  max-height: 90vh;
+  width: 100%;
+}
+
+.overflow-y-scroll{
+  overflow-y: scroll;
+}
+
+#todo{
+  background-color: rgb(207, 212, 197);
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  align-items: center;
+}
+
+#main{
+  margin-top: 2rem;
+  grid-column: 1 3;
+}
+
+.line-through{
+  text-decoration: line-through;
+}
+
+button{
+  border-radius: 5px;
+  border: 1px solid gray;
+  margin: 2px;
+  background-color: rgb(169, 163, 163);
+  transition-duration: 0.4s;
+  font-size: 16px;
+}
+
+button:hover{
+  background-color: rgb(147, 136, 136);
+}
+
+.removeButton:hover{
+  background-color: red;
+}
+
+#addButton{
+  margin: 2px;
+}
+
+#addButton:hover{
+  background-color: rgb(78, 203, 78);
+}
+
+.borderless{
+  border: none;
+}
+
+#todo-text{
+  margin: 0px 5px 0px 5px;
+  font-size: 16px;
+}
+
+#todo-input{
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  outline: none;
+  margin: 2px;
+  font-size: 16px;
+}
+
+#todo-input:focus{
+  border: 2px solid gray;
+}
+
+#input-section{
+  display: grid;
+  grid-template-columns: 50% 50%;   
+  height: 30px;
+  margin-bottom: 5px;
+
+}
+
+#operations-buttons{
+  background-color: rgb(64, 75, 66);
+  padding: 10px;
+}
+
+#operations-buttons button{
+  padding: 5px;
+  margin: 5px;
+}
