@@ -1,6 +1,7 @@
 <script>
 
 import ToDoList from './components/ToDoList.vue'
+import ToDoInput from './components/ToDoInput.vue'
 
 const filters = {
   all: (todos) => todos,
@@ -10,24 +11,22 @@ const filters = {
 
 export default {
   components: {
-    ToDoList
+    ToDoList,
+    ToDoInput
   },
   data() {
     return {
-      newTodo: '',
       todos: [],
       filter: 'all',
-      id: 0
+      id: 0,
+      addingTodo: false
     }
   },
   methods: {
-    addTodo() {
-      if (this.newTodo !== "") {
-        let todo = { id: this.id++, title: this.newTodo, completed: false }
-        this.todos.push(todo)
-        this.newTodo = ""
-        this.saveTodos()
-      }
+    addTodo(title, desc) {
+      let todo = { id: this.id++, title: title, completed: false, desc: desc}
+      this.todos.push(todo)
+      this.saveTodos()
     },
     removeTodo(t) {
       this.todos.splice(this.todos.indexOf(t), 1)
@@ -70,11 +69,11 @@ export default {
   <main id="main">
 
     <section id="input-section">
+      <button id="addButton" @click="addingTodo = true"> Criar nova tarefa</button>
+    </section>
 
-      <input id="todo-input" v-model="newTodo" placeholder="Tarefa..." @keyup.enter="addTodo">
-
-      <button id="addButton" @click="addTodo"> Adicionar Tarefa</button>
-
+    <section v-if="addingTodo == true" :class="{ 'overlay': addingTodo }">
+      <ToDoInput v-if="addingTodo == true" @closeMenu="addingTodo = false" @newTodo="(title, desc) => addTodo(title, desc)"/>
     </section>
 
     <ToDoList :todos="filteredTodos" @removeTodo="(t) => removeTodo(t)" @removeAll="removeAll"
