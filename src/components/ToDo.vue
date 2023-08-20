@@ -13,7 +13,6 @@ export default {
             {{ todo.title }}
         </p>
 
-
         <button class="removeButton borderless" @click="$emit('removeTodo', todo)"> X </button>
     </section>
 </template>
