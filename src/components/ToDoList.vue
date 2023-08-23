@@ -7,7 +7,7 @@ export default {
         ToDo
     },
     props: ["todos"],
-    emits: ['removeTodo', 'removeCompleted', 'removeActive', 'removeAll', 'changeFilter']
+    emits: ['removeTodo', 'removeCompleted', 'removeActive', 'removeAll', 'changeFilter', 'editTodo', 'saveTodos']
 }
 
 </script>
@@ -24,7 +24,8 @@ export default {
             <button class="removeButton" @click="$emit('removeActive')"> Remover Ativos </button>
         </section>
 
-        <ToDo v-for="t in todos" :todo="t" @removeTodo="(t) => $emit('removeTodo', t)" />
+        <ToDo v-for="t in todos" :todo="t" @removeTodo="(t) => $emit('removeTodo', t)"
+            @editTodo="(t) => $emit('editTodo', t)" @saveTodos="$emit('saveTodos')"/>
 
     </main>
 </template>

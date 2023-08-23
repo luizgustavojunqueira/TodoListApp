@@ -7,7 +7,7 @@ export default {
         }
     },
     props: ['todo'],
-    emits: ['removeTodo']
+    emits: ['removeTodo', 'editTodo', 'saveTodos']
 }
 </script>
 
@@ -15,7 +15,7 @@ export default {
     <section id="todo-list-item">
 
         <section id="todo">
-            <p id="todo-text" :class="{ 'line-through': todo.completed }" @dblclick="showDesc = !showDesc">
+            <p id="todo-text" :class="{ 'line-through': todo.completed }" @dblclick="$emit('editTodo', todo)" @click="showDesc = !showDesc">
                 {{ todo.title }}
             </p>
             
@@ -25,7 +25,7 @@ export default {
         </section>
 
 
-        <button id="completed-button" class="borderless" @click="todo.completed = !todo.completed"> <div v-if="todo.completed" id="checkmark"></div> </button>
+        <button id="completed-button" class="borderless" @click="() => {todo.completed = !todo.completed; $emit('saveTodos')}"> <div v-if="todo.completed" id="checkmark"></div> </button>
         <button class="removeButton borderless" @click="$emit('removeTodo', todo)"> X </button>
     </section>
 </template>

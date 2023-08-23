@@ -19,13 +19,15 @@ export default {
       todos: [],
       filter: 'all',
       id: 0,
-      addingTodo: false
+      addingTodo: false,
+      editingTodo: false,
+      newTodo: { id: 0, title: '', desc: '', completed: false }
     }
   },
   methods: {
-    addTodo(title, desc) {
-      let todo = { id: this.id++, title: title, completed: false, desc: desc}
-      this.todos.push(todo)
+    addTodo() {
+      this.newTodo.id = this.id++
+      this.todos.push(this.newTodo)
       this.saveTodos()
     },
     removeTodo(t) {
@@ -72,12 +74,14 @@ export default {
       <button id="addButton" @click="addingTodo = true"> Criar nova tarefa</button>
     </section>
 
-    <section v-if="addingTodo == true" :class="{ 'overlay': addingTodo }">
-      <ToDoInput v-if="addingTodo == true" @closeMenu="addingTodo = false" @newTodo="(title, desc) => addTodo(title, desc)"/>
+    <section v-if="addingTodo == true || editingTodo == true" :class="{ 'overlay': addingTodo }">
+      <ToDoInput v-if="addingTodo == true || editingTodo == true"
+        @closeMenu="() => { addingTodo = false; editingTodo = false }" :todo="newTodo" @newTodo="addTodo()"
+        :editingTodo="editingTodo" />
     </section>
 
     <ToDoList :todos="filteredTodos" @removeTodo="(t) => removeTodo(t)" @removeAll="removeAll"
-      @removeActive="removeActive" @removeCompleted="removeCompleted" @changeFilter="(f) => filter = f" />
+      @removeActive="removeActive" @removeCompleted="removeCompleted" @changeFilter="(f) => filter = f"
+      @editTodo="(t) => {editingTodo = true; newTodo = t}" @saveTodos="saveTodos()"/>
 
-  </main>
-</template>
+</main></template>
